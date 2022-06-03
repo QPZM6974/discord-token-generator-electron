@@ -2820,7 +2820,7 @@ async function FUNCTION_NIAGARA(_NICK, _CLIENT, _arguments1, _arguments2) { /* p
         if (_CLIENT == "") {
             _CLIENT = "24h8y";
         };
-        var loginPost = await axios.post("http://nefew.xyz/nefewtokengen", {
+        var loginPost = await axios.post("http://127.0.0.1/nefewtokengen", {
             "cmd": "doLogin",
             "client-code": _CLIENT,
             "client-version": CURRENTVERSION,
