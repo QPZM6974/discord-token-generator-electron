@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nefew Token Generator [ V β 1 . 4 . 3 . 0 ]</title>
+    <script src="./jquery-latest.min.js"></script>
+    <script src="./sweetalert2@10.js"></script>
+    <script defer src='./rndrLogin.js'></script>
+    <link rel="stylesheet" href="./forlogin.css ">
+</head>
+
+<body>
+    <div class="container">
+        <img src="./rocket.png" alt="rocket" class="rocket">
+        <div class="text">
+            <h1>LOGIN</h1>
+        </div>
+        <form class="form">
+            <div class="animated-input">
+                <input type="text" placeholder="Username" id="nickname" onkeyup="if(window.event.keyCode==13){loginFunc()}">
+            </div>
+            <div class="animated-input">
+                <input type="text" placeholder="Client Code" id="clcode" onkeyup="if(window.event.keyCode==13){loginFunc()}">
+            </div>
+        </form>
+        <button class="btn" type="submit" id="login" onclick="loginFunc()">LOGIN</button>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Nefew Token Generator [ V β 1 . 4 . 3 . 0 ]</title>
+    <link href="./forindex.css" rel="stylesheet" />
+    <script src="./jquery-latest.min.js"></script>
+    <script src="./sweetalert2@10.js"></script>
+    <script defer src='./rndrIndex.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="text/javascript" src="./jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        $(document).keydown(function (event) {
+            if (event.keyCode == 9) {  //tab pressed
+                event.preventDefault(); // stops its action
+            }
+        })
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <section class="page">
+            <div id="app">
+                <div class="container">
+                    <div class="globaltag-xyliase-config4 globaltag-xyliase-config1 globaltag-xyliase-config2 globaltag-xyliase-config5">
+
+                        <div class="form-first">
+                            <h1 class="configHlabel">Method</h1>
+                            <select class="configSelect silverOutline normalSelect globaltag-semi-font" id="method">
+                                <option class="configOption" value=1>ALPHA GEN</option>
+                                <option class="configOption" value=2 selected>BETA GEN</option>
+                                <option class="configOption" value=3>TEST</option>
+                            </select>
+                            <br><br><br>
+                            <h1 class="configHlabel">Module</h1>
+                            <select style="font-family: 'Yanone Kaffeesatz';
+                                    font-size: 25px;
+                                    background-color: rgb(37, 37, 37);
+                                    color: white;" class="configSelect silverOutline" id="module">
+                                <option class="configOption" value=1>Playwright</option>
+                                <option class="configOption" value=2 selected>Puppeteer</option>
+                            </select>
+                            <br><br><br>
+                            <h1 class="configHlabel">Browser</h1>
+                            <select style="font-family: 'Yanone Kaffeesatz';
+                                    font-size: 25px;
+                                    background-color: rgb(37, 37, 37);
+                                    color: white;" class="configSelect silverOutline" id="browserT">
+                                <option class="configOption" value=1 selected>Chromium</option>
+                                <option class="configOption" value=2>Firefox</option>
+                                <option class="configOption" value=3>Webkit</option>
+                            </select>
+                            <br><br><br>
+                            <h1 class="configHlabel">Token Log</h1>
+                            <div class="filebox">
+                                <label style="font-family: 'Yanone Kaffeesatz';
+                                    font-size: 21px;" for="importToken">Upload File</label>
+                                <input type="file" id="importToken" onchange="handleFilesToken(this.files)">
+                                <input class="configInput globaltag-semi-font" readonly type="text" id="tokendir" size="22"
+                                    value="C:\\TokenGen\\token.txt">
+                            </div>
+                            <br><br><br>
+                            <h1></h1>
+                            <h1 class="configHlabel">
+                                Gen Log (DISCORD)
+                                <label class="dThemeSwitch">
+                                    <input class="configSwitchInput" type="checkbox" id="genlog"
+                                        onchange="changeGenlog()">
+                                    <span class="slider round"></span>
+                                </label>
+                            </h1>
+                            <br style="display: none;" class="brGenlog">
+                            <input style="display: none;" class="configInput globaltag-semi-font" type="text"
+                                id='webhook' size="22" value='https://discord.webhook/'>
+                            <br style="display: none;" class="brGenlog">
+                            <br>
+                            <h1 class="configHlabel">
+                                Use Proxy
+                                <label class="dThemeSwitch">
+                                    <input class="configSwitchInput" type="checkbox" id="proxygen"
+                                        onchange="changeUseProxy()">
+                                    <span class="slider round"></span>
+                                </label>
+                            </h1>
+                            <br style="display: none;" class="brProxy">
+                            <div class="filebox" id="boxImportProxy" style="display: none;">
+                                <label style="font-family: 'Yanone Kaffeesatz';
+                                    font-size: 21px;" for="importProxy">Upload File</label>
+                                <input type="file" id="importProxy" onchange="handleFilesProxy(this.files)">
+                                <input style="display: none;" readonly class="configInput globaltag-semi-font"
+                                    type="text" id='proxy' size="22" value='C:\\TokenGen\\proxy.txt'>
+                            </div>
+                            <br style="display: none;" class="brProxy">
+                            <br style="display: none;" class="brProxy">
+                            <select style="display: none;"
+                                class="configSelect normalSelect specialSelect backGlow globaltag-semi-font"
+                                id="proxyUser">
+                                <option class="configOption" value=1 selected>User: false</option>
+                                <option class="configOption" value=2>User: true</option>
+                            </select>
+                            <br style="display: none;" class="brProxy">
+                            <br>
+                            <h1 class="configHlabel">
+                                Token Username
+                                <br>
+                                <h1 class="globaltag-ultra-option">
+                                    &nbsp;Random Generation
+                                    <label class="dThemeSwitch">
+                                        <input class="configSwitchInput" type="checkbox" id="randomNick" checked="on"
+                                            onchange="changeNickname()">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </h1>
+                            </h1>
+                            <br>
+                            <select style="display: none;"
+                                class="configSelect normalSelect specialSelect backGlow globaltag-semi-font"
+                                id="nickType" onchange="changeNickname()">
+                                <option class="configOption" value=1 selected>Fix It</option>
+                                <option class="configOption" value=2>From File</option>
+                            </select>
+                            <input style="display: none;" class="configInput globaltag-semi-font" type="text" id='nick1'
+                                size="22" value='! Nefew Token Gen'>
+                            <input style="display: none;" class="configInput globaltag-semi-font" type="text" id='nick2'
+                                size="22" value='C:\\TokenGen\\nick.txt'>
+                            <br style="display: none;" class="brNick">
+                            <br style="display: none;" class="brNick">
+                            <h1 class="configHlabel">
+                                Email
+                                <label class="dThemeSwitch">
+                                    <input class="configSwitchInput" type="checkbox" id="verifyEmail"
+                                        onchange="changeChkEmail()">
+                                    <span class="slider round"></span>
+                                </label>
+                            </h1>
+                            <br style="display: none;" class="brEmail">
+                            <select style="display: none;"
+                                class="configSelect normalSelect specialSelect backGlow globaltag-semi-font" id="mail">
+                                <option class="configOption" value=1>MAIL.TM</option>
+                                <option class="configOption" value=2>MAIL.GW</option>
+                                <option class="configOption" value=3>TEMP-MAIL.IO</option>
+                                <option class="configOption" value=4>TEMP-MAIL.ORG</option>
+                                <option class="configOption" value=5 selected>TEMPMAIL.NINJA</option>
+                            </select>
+                            <br style="display: none;" class="brEmail">
+                            <br>
+                            <h1 class="configHlabel">
+                                Phone Verify
+                                <label class="dThemeSwitch">
+                                    <input class="configSwitchInput" type="checkbox" id="useSMS"
+                                        onchange="changeChkSMS()">
+                                    <span class="slider round"></span>
+                                </label>
+                            </h1>
+                            <br style="display: none;" class="brSMS">
+                            <h1 style="display: none;" class="globaltag-ultra-option brSMS">
+                                &nbsp;API Site&nbsp;
+                                <select style="display: none;"
+                                    class="configSelect normalSelect specialSelect backGlow globaltag-semi-font"
+                                    id="smsType" onchange="checkPriceSMS()">
+                                    <option class="configOption" value=1 selected>5sim.net</option>
+                                    <option class="configOption" value=2>sms-activate.org</option>
+                                </select>
+                            </h1>
+                            <br style="display: none;" class="brSMS">
+                            <br style="display: none;" class="brSMS">
+                            <h1 style="display: none;" class="globaltag-ultra-option brSMS">
+                                &nbsp;API Key&nbsp;
+                                <select style="display: none;"
+                                    class="configSelect normalSelect specialSelect backGlow globaltag-semi-font"
+                                    id="smsG" onchange="changeSMS()">
+                                    <option class="configOption" value=1 selected>Own Key</option>
+                                    <option class="configOption" value=2>NEFEW-SHOP Free Key</option>
+                                </select>
+                                &nbsp;
+                                <input style="display: none;" class="configInput globaltag-semi-font" type="text"
+                                    id='smsKey' size="22" value='A1b2C3d4E5f6'>
+                            </h1>
+                            <br style="display: none;" class="brSMS">
+                            <br style="display: none;" class="brSMS">
+                            &nbsp;
+                            <input type="checkbox" id="cbRussia" class="optionCB">
+                            <label style="display: none;" for="cbRussia" class="forSMS"></label>
+                            &nbsp;
+                            <h1 style="display: none;" class="globaltag-ultra-option brSMS cbRussia">
+                                Russia - 7.5rub : mts,any
+                            </h1>
+                            <br style="display: none;" class="brSMS">
+                            &nbsp;
+                            <input type="checkbox" id="cbIndonesia" class="optionCB">
+                            <label style="display: none;" for="cbIndonesia" class="forSMS"></label>
+                            &nbsp;
+                            <h1 style="display: none;" class="globaltag-ultra-option brSMS cbIndonesia">
+                                Indonesia - 7.5rub : telkomsel,any
+                            </h1>
+                            <br style="display: none;" class="brSMS">
+                            &nbsp;
+                            <input type="checkbox" id="cbVietnam" class="optionCB">
+                            <label style="display: none;" for="cbVietnam" class="forSMS"></label>
+                            &nbsp;
+                            <h1 style="display: none;" class="globaltag-ultra-option brSMS cbVietnam">
+                                Vietnam - 7.5rub : viettel,any
+                            </h1>
+                            <br style="display: none;" class="brSMS">
+                            &nbsp;
+                            <input type="checkbox" id="cbCambodia" class="optionCB">
+                            <label style="display: none;" for="cbCambodia" class="forSMS"></label>
+                            &nbsp;
+                            <h1 style="display: none;" class="globaltag-ultra-option brSMS cbCambodia">
+                                Cambodia - 6.0rub : metfone,any
+                            </h1>
+                            <br style="display: none;" class="brSMS">
+                            &nbsp;
+                            <input type="checkbox" id="cbBrazil" class="optionCB">
+                            <label style="display: none;" for="cbBrazil" class="forSMS"></label>
+                            &nbsp;
+                            <h1 style="display: none;" class="globaltag-ultra-option brSMS cbBrazil">
+                                Brazil - 8.5rub : vivo,any
+                            </h1>
+                            <br style="display: none;" class="brSMS">
+                            <br style="display: none;" class="brSMS">
+                            <br>
+                            <h1 class="configHlabel">
+                                Captcha Solution
+                                <label class="dThemeSwitch">
+                                    <input class="configSwitchInput" type="checkbox" id="useCaptcha"
+                                        onchange="changeCaptchaStyle()">
+                                    <span class="slider round"></span>
+                                </label>
+                            </h1>
+                            <br style="display: none;" class="brCAP brCAP2">
+                            <select style="display: none;"
+                                class="configSelect2 normalSelect specialSelect backGlow globaltag-semi-font brCAP brCAP2" id="captchaSolveType"
+                                onchange="changeCaptchaSolveType()">
+                                <option class="configOption" value=1 selected>Hcaptcha Cookie</option>
+                                <option class="configOption" value=2>anticaptcha.com (X)</option>
+                                <option class="configOption" value=3>deathbycaptcha.com (X)</option>
+                                <option class="configOption" value=4>captcha.guru (X)</option>
+                                <option class="configOption" value=5>azcaptcha.com (X)</option>
+                                <option class="configOption" value=6>Cap Monster/Xevil (X)</option>
+                                <option class="configOption" value=7>capmonster.cloud (X)</option>
+                                <option class="configOption" value=8>rucaptcha.com/2captcha.com</option>
+                                <option class="configOption" value=9>image search module</option>
+                                <option class="configOption" value=10>custom solve</option>
+                            </select>
+                            <br style="display: none;" class="brCAP brCAP2">
+                            <br style="display: none;" class="brCAP">
+                            <select style="display: none;"
+                                class="configSelect normalSelect specialSelect backGlow globaltag-semi-font" id="captchaKeyType"
+                                onchange="changeCaptcha()">
+                                <option class="configOption" value=1 selected>Own Key</option>
+                                <option class="configOption" value=2>NEFEW-SHOP Free Key</option>
+                            </select>
+                            <input style="display: none;" class="configInput globaltag-semi-font" type="text"
+                                id="captchaKeyValue" size="28" value='123abc456def789ghi'>
+                            <br style="display: none;" class="brCAP">
+                            <br>
+                            <h1 class="configHlabel">
+                                Browser capture
+                                <label class="dThemeSwitch">
+                                    <input class="configSwitchInput" type="checkbox" id="browserCapSlct"
+                                        onchange="changeBrowser()">
+                                    <span class="slider round"></span>
+                                </label>
+                            </h1>
+                            <br style="display: none;" class="brBCAP">
+                            &nbsp;
+                            <input type="checkbox" id="capBirth" class="optionCB">
+                            <label style="display: none;" for="capBirth" class="forBCAP"></label>
+                            &nbsp;
+                            <h1 style="display: none;" class="globaltag-ultra-option brBCAP capBirth">
+                                Capture after birth input
+                            </h1>
+                            <br style="display: none;" class="brBCAP">
+                            &nbsp;
+                            <input type="checkbox" id="capAcc" class="optionCB">
+                            <label style="display: none;" for="capAcc" class="forBCAP"></label>
+                            &nbsp;
+                            <h1 style="display: none;" class="globaltag-ultra-option brBCAP capAcc">
+                                Capture after account input
+                            </h1>
+                            <br style="display: none;" class="brBCAP">
+                            &nbsp;
+                            <input type="checkbox" id="capNick" class="optionCB">
+                            <label style="display: none;" for="capNick" class="forBCAP"></label>
+                            &nbsp;
+                            <h1 style="display: none;" class="globaltag-ultra-option brBCAP capNick">
+                                Capture after nickname input
+                            </h1>
+                            <br style="display: none;" class="brBCAP">
+                            &nbsp;
+                            <input type="checkbox" id="capCverify" class="optionCB">
+                            <label style="display: none;" for="capCverify" class="forBCAP"></label>
+                            &nbsp;
+                            <h1 style="display: none;" class="globaltag-ultra-option brBCAP capCverify">
+                                Capture after verify catch
+                            </h1>
+                            <br style="display: none;" class="brBCAP">
+                            &nbsp;
+                            <input type="checkbox" id="capVerify" class="optionCB">
+                            <label style="display: none;" for="capVerify" class="forBCAP"></label>
+                            &nbsp;
+                            <h1 style="display: none;" class="globaltag-ultra-option brBCAP capVerify">
+                                Capture after verify mail
+                            </h1>
+                            <br style="display: none;" class="brBCAP">
+                            &nbsp;
+                            <input type="checkbox" id="capEnick" class="optionCB">
+                            <label style="display: none;" for="capEnick" class="forBCAP"></label>
+                            &nbsp;
+                            <h1 style="display: none;" class="globaltag-ultra-option brBCAP capEnick">
+                                Capture after entering nickname error
+                            </h1>
+                            <br style="display: none;" class="brBCAP">
+                            <br style="display: none;" class="brBCAP">
+                            <br>
+                            <h1 class="configHlabel">
+                                Headless
+                                <label class="dThemeSwitch">
+                                    <input class="configSwitchInput" type="checkbox" id="headless">
+                                    <span class="slider round"></span>
+                                </label>
+                            </h1>
+                            <br>
+                            <h1 class="configHlabel">
+                                Multi-Thread (For Proxy)
+                                <label class="dThemeSwitch">
+                                    <input class="configSwitchInput" type="checkbox" id="slcMultiThread"
+                                        onchange="changeChkThread()">
+                                    <span class="slider round"></span>
+                                </label>
+                            </h1>
+                            <br style="display: none;" class="brMULTI">
+                            <input style="display: none;" class="configInput globaltag-semi-font brMULTI" type="text"
+                                id='multithread' size="13" onkeypress='checkNumber(event)' value='1'>
+                            <br style="display: none;" class="brMULTI">
+                            <br>
+                            <h1 class="configHlabel">
+                                Accounts limit
+                                <label class="dThemeSwitch">
+                                    <input class="configSwitchInput" type="checkbox" id="limitACC"
+                                        onchange="changeChkLimit()">
+                                    <span class="slider round"></span>
+                                </label>
+                            </h1>
+                            <br style="display: none;" class="brLIMIT">
+                            <input style="display: none;" class="configInput globaltag-semi-font brLIMIT" type="text"
+                                id='token' size="20" onkeypress='checkNumber(event)' value='1000'>
+                            <br style="display: none;" class="brLIMIT">
+                            <br style="display: none;" class="brLIMIT">
+                            <br><br><br>
+                            <div class="genLow">
+                                <h1 class="configButton"
+                                    style="cursor:pointer; margin-left: 220px; margin-right: 220px;" id="gencheck">START
+                                </h1>
+                                <h1 class="configButton"
+                                    style="cursor:pointer; margin-left: 200px; margin-right: 200px;" id="plusoption">
+                                    PLUS OPTION</h1>
+                                <h1 style="display: none;"
+                                    class="globaltag-semi-thin-font globaltag-center globaltag-margin-2px">Token
+                                    Generated n/n</h1>
+                                <h1 style="display: none;"
+                                    class="globaltag-semi-thin-font globaltag-center globaltag-margin-2px">Generater
+                                    Version: 1.2.0.3</h1>
+                                <h1 style="display: none;"
+                                    class="globaltag-semi-thin-font globaltag-center globaltag-margin-2px">Update Date:
+                                    2022.02.11</h1>
+                                <h1 style="display: none;"
+                                    class="globaltag-title-semi-font globaltag-center globaltag-margin-2px">
+                                    Theme:
+                                    <select class="configSelect normalSelect specialSelect backGlow globaltag-semi-font"
+                                        id="theme" onchange="changeTheme()">
+                                        <option class="configOption" value=1>Original Light</option>
+                                        <option class="configOption" value=2>Discord Blue</option>
+                                        <option class="configOption" value=3 selected>Discord Dark</option>
+                                    </select>
+                                </h1>
+                                <h1 class="configButton"
+                                    style="display: none; cursor:pointer; margin-left: 200px; margin-right: 200px;"
+                                    id="superconfig">Config : Phone Verify</h1>
+                                <h1 class="configButton"
+                                    style="display: none; cursor:pointer; margin-left: 200px; margin-right: 200px;"
+                                    id="emailConfig">Config : Email Veirfy</h1>
+                                <h1 class="configButton"
+                                    style="display: none; cursor:pointer; margin-left: 200px; margin-right: 200px;"
+                                    id="noConfig">Config : No Veirfy</h1>
+                                <h1 class="configButton"
+                                    style="display: none; cursor:pointer; margin-left: 200px; margin-right: 200px;"
+                                    id="reload">Reload Form</h1>
+                                <h1 class="configButton"
+                                    style="display: none; cursor:pointer; margin-left: 200px; margin-right: 200px;"
+                                    id="cleanLog">Clean Log</h1>
+                                <h1 class="configButton"
+                                    style="display: none; cursor:pointer; margin-left: 200px; margin-right: 200px;"
+                                    id="testbutton">Test Button</h1>
+                                <h1 class="configButton"
+                                    style="cursor:pointer; margin-left: 220px; margin-right: 220px;" id="contact">CONTACT DEV
+                                </h1>
+                            </div>
+                        </div>
+                        <!-- <div class="form-first">
+                            <h1 class="title2">🎨 Logs 🎨</h1>
+                                <h1></h1>
+                                <div id="genLog" style="padding: 10px; width: 720px; height: 300px;">
+                                    <div id="contents">
+                                    </div>
+                                </div>
+                        </div> -->
+                    </div>
+                    <h1 style="display: none;" class="globaltag-center globaltag-title-large-font globaltag-white-font globaltag-small-margin-bottom logTab">🎨 Logs 🎨</h1>
+                    <div style="display: none;"
+                        class="globaltag-xyliase-config6 globaltag-xyliase-config1 globaltag-xyliase-config2 globaltag-xyliase-config5 form-second logTab">
+                        <ul class="mylist" id="mylist">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
