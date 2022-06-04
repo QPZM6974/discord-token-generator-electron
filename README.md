@@ -19,3 +19,6 @@ Excute startSRC.bat, and input your user id, and client code.
 
 ## Suports.. (CAPTCHA)
 - **<a href="https://2captcha.com/">2captcha</a>**
+- **<a href="https://rucaptcha.com/">rucaptcha</a>**
+- **<a href="https://www.hcaptcha.com/">hcaptcha cookie</a>**
+- **<a>image search module</a>**
